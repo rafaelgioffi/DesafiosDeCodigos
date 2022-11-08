@@ -8,3 +8,7 @@
 /Desafio2/.vs
 /Desafio2/bin/Debug/net6.0
 /Desafio2/obj
+*.csproj
+*.sln
+/Desafio3/.vs/Desafio3
+/Desafio3/obj

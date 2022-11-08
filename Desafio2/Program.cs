@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Text;
+﻿using System.Text;
 
 namespace Desafio2
 {
@@ -37,7 +36,7 @@ namespace Desafio2
 
                     Matricula m;
                     m = new Matricula(matArq, n1Arq, n2Arq, n3Arq);
-                    matricula.Add(m);                    
+                    matricula.Add(m);
                 } while (!sr.EndOfStream);
                 sr.Close();
                 Console.WriteLine($"Alunos cadastrados: {matricula.Count()}\n");
@@ -47,61 +46,64 @@ namespace Desafio2
             {
                 fillList(matricula, arq);
             }
-            
-                do
+
+            do
+            {
+                Console.WriteLine("1 - Cadastrar Aluno");
+                Console.WriteLine("2 - Listar Alunos");
+                Console.WriteLine("3 - Sair");
+                Console.Write("\nOpção: ");
+                opcao = int.Parse(Console.ReadLine());
+
+                switch (opcao)
                 {
-                    Console.WriteLine("1 - Cadastrar Aluno");
-                    Console.WriteLine("2 - Listar Alunos");
-                    Console.WriteLine("3 - Sair");
-                    Console.Write("\nOpção: ");
-                    opcao = int.Parse(Console.ReadLine());
+                    case 1:
+                        try
+                        {
+                            Console.Clear();
+                            Console.Write("Informe a matricula (apenas números): ");
+                            int mat = int.Parse(Console.ReadLine());
+                            Console.Clear();
+                            Console.Write("Informe a primeira nota (Ex.: 9,5): ");
+                            float n1 = float.Parse(Console.ReadLine());
+                            Console.Clear();
+                            Console.Write("Informe a segunda nota (Ex.: 9,5): ");
+                            float n2 = float.Parse(Console.ReadLine());
+                            Console.Clear();
+                            Console.Write("Informe a terceira nota (Ex.: 9,5): ");
+                            float n3 = float.Parse(Console.ReadLine());
 
-                    switch (opcao)
-                    {
-                        case 1:
-                            try
-                            {
-                                Console.Clear();
-                                Console.Write("Informe a matricula (apenas números): ");
-                                int mat = int.Parse(Console.ReadLine());
-                                Console.Clear();
-                                Console.Write("Informe a primeira nota (Ex.: 9,5): ");
-                                float n1 = float.Parse(Console.ReadLine());
-                                Console.Clear();
-                                Console.Write("Informe a segunda nota (Ex.: 9,5): ");
-                                float n2 = float.Parse(Console.ReadLine());
-                                Console.Clear();
-                                Console.Write("Informe a terceira nota (Ex.: 9,5): ");
-                                float n3 = float.Parse(Console.ReadLine());
+                            Matricula m = new Matricula(mat, n1, n2, n3);
+                            matricula.Add(m);
 
-                                Matricula m = new Matricula(mat, n1, n2, n3);
-                                matricula.Add(m);
-
-                                StreamWriter sw = new StreamWriter(arq, append: true);
-                                sw.WriteLine($"{mat};{n1};{n2};{n3}");
-                                sw.Close();
-                                
-                                fillList(matricula, arq);
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine("\nFormato inválido!\nInforme apenas números inteiros para matricula e números decimais nas notas\n");
-                            }
-                            break;
+                            StreamWriter sw = new StreamWriter(arq, append: true);
+                            sw.WriteLine($"{mat};{n1};{n2};{n3}");
+                            sw.Close();
+                            Console.Clear();
+                            fillList(matricula, arq);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("\nFormato inválido!\nInforme apenas números inteiros para matricula e números decimais nas notas\n");
+                        }
+                        break;
                     case 2:
                         fillList(matricula, arq);
                         Console.Clear();
-                        Console.WriteLine("\n*** Alunos cadastrados ***\n");
-                        foreach(var m in matricula)
-                        {                            
-                            Console.WriteLine($"Matricula => {m.Mat}  |  Notas: N1 => {m.N1}  |  N2 => {m.N2}  |  N3 => {m.N3}");                            
+                        Console.WriteLine("*** Alunos cadastrados ***\n");
+                        foreach (var m in matricula)
+                        {
+                            Console.WriteLine($"Matricula => {m.Mat}  |  Notas: N1 => {m.N1}  |  N2 => {m.N2}  |  N3 => {m.N3}");
                         }
                         Console.WriteLine();
                         break;
-                    }
-                } while (opcao != 3);
-            
-
+                    case 3: break;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Opção inválida!\n");
+                        break;
+                }
+            } while (opcao != 3);
         }
     }
 }
