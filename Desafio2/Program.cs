@@ -93,9 +93,8 @@ namespace Desafio2
                         Console.Clear();
                         Console.WriteLine("\n*** Alunos cadastrados ***\n");
                         foreach(var m in matricula)
-                        {
-                            Console.WriteLine($"Matricula: {m.Mat}");
-                            Console.WriteLine($"Notas: N1 => {m.N1}  |  N2 => {m.N2}  |  N3 => {m.N3}");                            
+                        {                            
+                            Console.WriteLine($"Matricula => {m.Mat}  |  Notas: N1 => {m.N1}  |  N2 => {m.N2}  |  N3 => {m.N3}");                            
                         }
                         Console.WriteLine();
                         break;
